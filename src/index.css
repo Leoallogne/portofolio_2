@@ -297,3 +297,65 @@ body.nav-drawer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
 	.nav-links, .drawer-backdrop, .menu-button { transition: none; }
 }
+
+/* Final responsive pass for profile, skills, navigation, and project details. */
+.nav-wrap { min-height: 64px; }
+.nav { min-width: 0; }
+.nav-links { z-index: 60; }
+.drawer-backdrop { z-index: 55; }
+.profile-section .section-heading { position: relative; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.profile-section .section-heading::after { content: 'PROFILE / 01'; position: absolute; right: 0; bottom: 0; transform: translateY(50%); padding: 0 10px; background: var(--bg); color: var(--green); font: 10px var(--mono); letter-spacing: .08em; }
+.profile-section .about-grid { align-items: stretch; }
+.profile-section .about-intro { padding: 28px 34px 30px 54px; border: 1px solid var(--line); background: linear-gradient(135deg, color-mix(in srgb, var(--green) 7%, var(--bg)), var(--bg) 55%); }
+.profile-section .about-intro::before { content: '01'; position: absolute; top: 18px; right: 20px; color: color-mix(in srgb, var(--green) 35%, transparent); font: 10px var(--mono); }
+.profile-section .about-intro .large-quote { top: 24px; left: 18px; }
+.profile-section .about-intro p:first-of-type { margin-top: 24px; }
+.profile-section .pillar-grid { gap: 0; border: 1px solid var(--line); background: var(--bg); }
+.profile-section .pillar { min-width: 0; padding: 24px 20px; border-top: 0; border-right: 1px solid var(--line); }
+.profile-section .pillar:last-child { border-right: 0; }
+.profile-section .pillar svg { padding: 7px; width: 38px; height: 38px; border: 1px solid color-mix(in srgb, var(--green) 42%, var(--line)); background: color-mix(in srgb, var(--green) 8%, transparent); }
+.profile-section .profile-snapshot { margin-top: 38px; }
+.skills-grid { align-items: stretch; }
+.skill-group { overflow: hidden; }
+.skill-group-primary { background: linear-gradient(135deg, color-mix(in srgb, var(--green) 10%, var(--bg)), var(--bg) 62%); }
+.skill-group:nth-child(2) { background: linear-gradient(135deg, color-mix(in srgb, var(--warm) 7%, var(--bg)), var(--bg) 62%); }
+.skill-group:nth-child(3), .skill-group:nth-child(4), .skill-group:nth-child(5) { min-height: 220px; }
+.skill-group .badge { max-width: 100%; overflow-wrap: anywhere; }
+.project-modal-backdrop { z-index: 70; align-items: center; padding: clamp(16px, 4vw, 48px); }
+.project-modal { display: flex; flex-direction: column; width: min(820px, 100%); max-height: min(820px, calc(100dvh - 32px)); border-color: color-mix(in srgb, var(--green) 30%, var(--line)); box-shadow: 0 30px 100px color-mix(in srgb, #000 52%, transparent); }
+.modal-visual { flex: 0 0 auto; }
+.modal-content { overflow: auto; overscroll-behavior: contain; }
+.modal-header h2 { overflow-wrap: anywhere; }
+.modal-actions .button { min-height: 42px; }
+
+@media (max-width: 850px) {
+	.profile-section .about-grid { gap: 28px; }
+	.profile-section .about-intro { padding-left: 50px; }
+	.profile-section .pillar-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.profile-section .pillar { padding: 20px 15px; }
+	.project-modal-backdrop { align-items: center; }
+	.project-modal { max-height: calc(100dvh - 24px); }
+}
+
+@media (max-width: 520px) {
+	.nav { min-height: 64px; }
+	.brand { max-width: calc(100% - 54px); }
+	.profile-section .section-heading::after { right: auto; left: 0; }
+	.profile-section .about-intro { padding: 24px 20px 24px 45px; }
+	.profile-section .about-intro::before { right: 14px; }
+	.profile-section .pillar-grid { grid-template-columns: 1fr; }
+	.profile-section .pillar { display: grid; grid-template-columns: 38px 1fr; column-gap: 13px; align-items: start; border-right: 0; border-bottom: 1px solid var(--line); padding: 17px; }
+	.profile-section .pillar:last-child { border-bottom: 0; }
+	.profile-section .pillar svg { grid-row: span 2; margin: 0; }
+	.profile-section .pillar h3 { margin: 2px 0 5px; }
+	.profile-section .pillar p { margin-bottom: 0; }
+	.project-modal-backdrop { padding: 10px; align-items: end; }
+	.project-modal { max-height: calc(100dvh - 20px); }
+	.modal-visual { height: 112px; }
+	.modal-content { padding: 20px 18px 22px; }
+	.modal-header { gap: 12px; }
+	.modal-header h2 { font-size: 30px; }
+	.modal-description { margin: 22px 0; }
+	.modal-actions { display: grid; grid-template-columns: 1fr; }
+	.modal-actions .button { width: 100%; }
+}
