@@ -231,3 +231,11 @@ body.nav-drawer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
 	.burger-icon i, .nav-links, .drawer-backdrop { transition: none; }
 }
+
+.cv-download { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 14px; border: 1px solid var(--green); color: var(--green); font-size: 12px; font-weight: 700; transition: .2s ease; }
+.cv-download small, .nav-cv small { color: currentColor; font: 9px var(--mono); opacity: .72; text-transform: uppercase; }
+.cv-download:hover { background: color-mix(in srgb, var(--green) 12%, transparent); transform: translateY(-2px); }
+.nav-cv { display: inline-flex; align-items: center; gap: 7px; }
+.nav-cv small { margin-left: 2px; }
+@media (max-width: 850px) { .nav-cv { justify-content: center; } }
+@media (max-width: 520px) { .cv-download { width: 100%; justify-content: center; } }
