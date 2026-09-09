@@ -57,6 +57,59 @@
 }
 
 .hero-positioning { max-width: 600px; margin: 0 0 12px; color: var(--text); font-size: clamp(19px, 2.2vw, 27px); font-weight: 700; line-height: 1.25; letter-spacing: -.045em; }
+
+.hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+}
+.hero::before,
+.hero::after {
+	content: '';
+	position: absolute;
+	pointer-events: none;
+	z-index: -1;
+}
+.hero::before {
+	inset: 0 -12%;
+	background-image: linear-gradient(color-mix(in srgb, var(--green) 9%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--green) 9%, transparent) 1px, transparent 1px);
+	background-size: 72px 72px;
+	mask-image: linear-gradient(115deg, transparent 4%, #000 38%, #000 72%, transparent 98%);
+	-webkit-mask-image: linear-gradient(115deg, transparent 4%, #000 38%, #000 72%, transparent 98%);
+	opacity: .48;
+	animation: hero-grid-drift 26s linear infinite;
+}
+.hero::after {
+	top: 18%;
+	right: -8%;
+	width: min(62vw, 720px);
+	height: 1px;
+	background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--warm) 65%, transparent), transparent);
+	box-shadow: 0 90px 0 color-mix(in srgb, var(--green) 35%, transparent), 0 180px 0 color-mix(in srgb, var(--green) 20%, transparent);
+	opacity: .55;
+	transform: rotate(-28deg);
+	transform-origin: right center;
+	animation: hero-scanline 9s ease-in-out infinite alternate;
+}
+.hero-copy,
+.hero-side {
+	position: relative;
+	z-index: 1;
+}
+@keyframes hero-grid-drift {
+	from { background-position: 0 0, 0 0; }
+	to { background-position: 72px 72px, 72px 72px; }
+}
+@keyframes hero-scanline {
+	from { opacity: .22; transform: translateY(-40px) rotate(-28deg); }
+	to { opacity: .62; transform: translateY(210px) rotate(-28deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero::before,
+	.hero::after { animation: none; }
+}
+
 .hero-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 610px; margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); }
 .hero-facts div { display: grid; gap: 7px; }
 .hero-facts span, .hero-note span { color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
