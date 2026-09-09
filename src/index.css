@@ -81,10 +81,24 @@
 .icon-carousel-item:nth-child(3n) .icon-carousel-icon { color: var(--warm); border-color: color-mix(in srgb, var(--warm) 48%, var(--line)); background: color-mix(in srgb, var(--warm) 9%, transparent); }
 .icon-carousel-item:nth-child(4n) .icon-carousel-icon { color: #8fc4e8; border-color: color-mix(in srgb, #8fc4e8 48%, var(--line)); background: color-mix(in srgb, #8fc4e8 9%, transparent); }
 @keyframes icon-carousel-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.icon-carousel-track.is-paused { animation-play-state: paused; }
+.carousel-toggle { margin-left: auto; padding: 5px 8px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; font: 10px var(--mono); }
+.carousel-toggle:hover { background: color-mix(in srgb, var(--green) 12%, transparent); }
 
 @media (max-width: 520px) {
 	.icon-carousel-label b { display: none; }
+	.carousel-toggle { margin-left: auto; }
 	.icon-carousel-item { min-height: 52px; padding-right: 13px; }
+}
+
+@supports not (background: color-mix(in srgb, white 50%, black)) {
+	:root { --mix-bg: #0f171d; }
+	:root[data-theme='light'] { --mix-bg: #eef2ef; }
+	.nav-wrap { background: var(--bg); }
+	.section-tint { border-top-color: var(--line); border-bottom-color: var(--line); }
+	.icon-carousel { background: var(--mix-bg); }
+	.project-card, .repository-card, .skill-group { background: var(--surface); }
+	.project-modal-backdrop { background: rgba(5, 8, 10, .88); }
 }
 
 @media (max-width: 520px) {

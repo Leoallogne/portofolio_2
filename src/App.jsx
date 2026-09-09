@@ -18,6 +18,7 @@ function App() {
   const [filter, setFilter] = useState('All')
   useEffect(() => {
     document.documentElement.dataset.theme = theme
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f3f5f2' : '#0b0f14')
     storeTheme(undefined, theme)
   }, [theme])
   const projectFilters = getProjectFilters(projects)

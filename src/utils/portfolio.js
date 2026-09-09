@@ -6,9 +6,12 @@ function getDefaultStorage() {
   }
 }
 
+export const themes = ['dark', 'light']
+
 export function getStoredTheme(storage = getDefaultStorage()) {
   try {
-    return storage?.getItem('theme') || 'dark'
+    const storedTheme = storage?.getItem('theme')
+    return themes.includes(storedTheme) ? storedTheme : 'dark'
   } catch {
     return 'dark'
   }
