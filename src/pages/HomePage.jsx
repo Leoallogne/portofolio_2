@@ -5,8 +5,6 @@ import ProjectCard from '../components/ProjectCard'
 import SectionHeading from '../components/SectionHeading'
 import IconCarousel from '../components/IconCarousel'
 import CyberLabCard from '../components/CyberLabCard'
-import CyberLabDetail from '../components/CyberLabDetail'
-import CyberLabTerminal from '../components/CyberLabTerminal'
 import { labCards, projects, repositories, skillGroups } from '../data/projects'
 import { getProjectFilters } from '../utils/portfolio'
 
@@ -273,7 +271,17 @@ export default function HomePage({ navigateTo, filter, setFilter, activeLab, set
 
             <div className="lab-dashboard-body">
               <div className="lab-summary">
-                <p>{currentLab.objective ?? currentLab.summary ?? 'Learning focus is being prepared for this track.'}</p>
+                <div className="lab-summary-copy">
+                  <span className="lab-summary-kicker">Selected track</span>
+                  <p>{currentLab.objective ?? currentLab.summary ?? 'Learning focus is being prepared for this track.'}</p>
+                </div>
+
+                <div className="lab-badges" aria-label="Current lab topics">
+                  {currentLabTopics.slice(0, 4).map(topic => (
+                    <span key={topic}>{topic}</span>
+                  ))}
+                </div>
+
                 <div className="lab-metrics">
                   {currentLabMetrics.map(metric => (
                     <div className={`lab-metric lab-metric-${metric.tone}`} key={metric.label}>
@@ -309,11 +317,6 @@ export default function HomePage({ navigateTo, filter, setFilter, activeLab, set
               />
             ))}
           </div>
-        </div>
-
-        <div className="lab-showcase">
-          <CyberLabDetail lab={currentLab} />
-          <CyberLabTerminal lab={currentLab} />
         </div>
 
         <div className="see-more-wrap">

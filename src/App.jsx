@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
@@ -60,7 +60,7 @@ function App() {
           setActiveLab={setActiveLab}
         />
       )}
-      <Footer />
+      <Footer onNavigate={navigateTo} page={view} />
       <BackToTop />
     </div>
   )

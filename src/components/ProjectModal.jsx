@@ -16,6 +16,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
   const role = project.role ?? 'Independent product development and implementation.'
   const challenges = project.challenges ?? 'The main challenge was balancing clarity, usability, and learning while keeping the project practical and structured.'
   const statusText = project.status ?? 'In progress'
+  const statusClass = statusText.toLowerCase().replace(/\s+/g, '-')
 
   useEffect(() => {
     if (!isOpen) {
@@ -23,7 +24,6 @@ export default function ProjectModal({ project, isOpen, onClose }) {
     }
 
     const previousFocus = document.activeElement
-
     const handleKeyDown = event => {
       if (event.key === 'Escape') {
         onClose()
@@ -155,48 +155,48 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               </div>
 
               <div className="modal-columns modal-columns-split">
-                <div>
+                <section>
                   <span className="modal-label">Problem</span>
                   <p className="modal-copy">{problem}</p>
-                </div>
+                </section>
 
-                <div>
+                <section>
                   <span className="modal-label">Solution</span>
                   <p className="modal-copy">{solution}</p>
-                </div>
+                </section>
               </div>
 
               <div className="modal-columns modal-columns-split">
-                <div>
+                <section>
                   <span className="modal-label">My role</span>
                   <p className="modal-copy">{role}</p>
-                </div>
+                </section>
 
-                <div>
+                <section>
                   <span className="modal-label">Challenges / learning</span>
                   <p className="modal-copy">{challenges}</p>
-                </div>
+                </section>
               </div>
 
               <div className="modal-columns modal-columns-split">
-                <div>
+                <section>
                   <span className="modal-label">Key features</span>
                   <ul className="modal-features">
                     {project.features.map(feature => (
                       <li key={feature}><Check size={15} />{feature}</li>
                     ))}
                   </ul>
-                </div>
+                </section>
 
-                <div>
+                <section>
                   <span className="modal-label">Status</span>
                   <div className="status-stack">
-                    <span className={`project-status project-status-${statusText.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <span className={`project-status project-status-${statusClass}`}>
                       {statusText}
                     </span>
                     <p className="modal-copy">{project.preview}</p>
                   </div>
-                </div>
+                </section>
               </div>
 
               <div className="modal-actions">

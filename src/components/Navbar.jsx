@@ -1,4 +1,4 @@
-﻿import { Download, Moon, Sun } from 'lucide-react'
+import { Download, Moon, Sun } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const sectionLinks = [['About', 'about'], ['Skills', 'skills'], ['Experience', 'experience'], ['Projects', 'projects'], ['Cybersecurity', 'cybersecurity'], ['Contact', 'contact']]
@@ -75,10 +75,12 @@ export default function Navbar({ theme, toggleTheme, page = 'home', onNavigate }
     }
   }, [open])
 
+  const wasOpenRef = useRef(false)
   useEffect(() => {
-    if (!open) {
+    if (wasOpenRef.current && !open) {
       menuButtonRef.current?.focus()
     }
+    wasOpenRef.current = open
   }, [open])
 
   const navLinks = page === 'home' ? sectionLinks : archiveLinks

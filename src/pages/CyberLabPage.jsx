@@ -1,8 +1,15 @@
-﻿import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
+import { useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
+import CyberLabCard from '../components/CyberLabCard'
+import CyberLabDetail from '../components/CyberLabDetail'
+import CyberLabTerminal from '../components/CyberLabTerminal'
 import { labCards } from '../data/projects'
 
 export default function CyberLabPage({ navigateTo }) {
+  const [activeLab, setActiveLab] = useState(0)
+  const currentLab = labCards[activeLab] ?? labCards[0]
+
   return (
     <main className="archive-page">
       <section className="section container">
@@ -22,30 +29,54 @@ export default function CyberLabPage({ navigateTo }) {
           These are the additional lab directions I plan to expand as the portfolio grows, with screenshots and hosted previews coming later.
         </SectionHeading>
 
-        <div className="lab-grid lab-grid-archive">
-          {labCards.map((lab, index) => {
-            const labTopics = lab.topics ?? lab.focus ?? []
+        <div className="cyberlab-overview">
+          <div className="cyberlab-overview-header">
+            <span className="cyberlab-kicker">Current track</span>
+            <span className="lab-status"><i />{currentLab.status}</span>
+          </div>
 
-            return (
-              <article className="lab-card lab-card-archive" key={`${lab.id}-archive`}>
-                <div className="lab-top">
-                  <span className="lab-status"><i />{lab.status}</span>
-                  <span className="lab-index">0{index + 1}</span>
-                </div>
-                <div className="lab-card-heading">
-                  <h3>{lab.title}</h3>
-                  <span>Topics</span>
-                </div>
-                <div className="topic-list">
-                  {labTopics.map(topic => <span key={`${lab.id}-archive-${topic}`}>{topic}</span>)}
-                </div>
-                <div className="lab-archive-footer">
-                  <span>Preview pending</span>
-                  <ChevronLeft size={15} />
-                </div>
-              </article>
-            )
-          })}
+          <div className="cyberlab-overview-body">
+            <div className="cyberlab-overview-copy">
+              <h3>{currentLab.title}</h3>
+              <p>{currentLab.objective}</p>
+            </div>
+
+            <div className="cyberlab-meta-grid">
+              <div>
+                <span>Difficulty</span>
+                <strong>{currentLab.difficulty}</strong>
+              </div>
+              <div>
+                <span>Progress</span>
+                <strong>{currentLab.progress}%</strong>
+              </div>
+              <div>
+                <span>Focus</span>
+                <strong>{currentLab.topics?.[0] ?? 'Lab practice'}</strong>
+              </div>
+              <div>
+                <span>Mode</span>
+                <strong>Controlled lab</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="lab-showcase">
+          <CyberLabDetail lab={currentLab} />
+          <CyberLabTerminal key={currentLab.id} lab={currentLab} />
+        </div>
+
+        <div className="lab-grid lab-grid-archive">
+          {labCards.map((lab, index) => (
+            <CyberLabCard
+              key={`${lab.id}-archive`}
+              lab={lab}
+              index={index}
+              active={activeLab === index}
+              onSelect={setActiveLab}
+            />
+          ))}
         </div>
       </section>
     </main>
