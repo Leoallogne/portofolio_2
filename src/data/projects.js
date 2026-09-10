@@ -15,8 +15,56 @@ export const skillGroups = [
 ]
 
 export const labCards = [
-  ['Networking Fundamentals', ['TCP/IP', 'IP Addressing', 'Subnetting', 'DNS', 'DHCP', 'OSI Model'], 'Practicing'],
-  ['Linux Fundamentals', ['Linux CLI', 'File Permissions', 'Processes', 'Networking Commands', 'Package Management'], 'Practicing'],
-  ['Web Security', ['HTTP/HTTPS', 'Authentication', 'Sessions', 'Input Validation', 'OWASP Fundamentals'], 'Learning'],
-  ['Metasploit Fundamentals', ['Modules', 'Payload concepts', 'Exploitation concepts', 'Controlled lab practice'], 'Learning']
+  {
+    id: 'networking',
+    title: 'Networking Fundamentals',
+    status: 'Practicing',
+    summary: 'Understanding how devices communicate, why protocols matter, and how network services behave in real environments.',
+    focus: ['TCP/IP', 'IP Addressing', 'Subnetting', 'DNS', 'DHCP'],
+    checkpoints: ['Packet flow analysis', 'Subnet planning', 'Service discovery'],
+    metrics: [
+      { label: 'Protocols', value: '6', tone: 'green' },
+      { label: 'Labs', value: '12', tone: 'warm' },
+      { label: 'Progress', value: '72%', tone: 'blue' }
+    ]
+  },
+  {
+    id: 'linux',
+    title: 'Linux Fundamentals',
+    status: 'Practicing',
+    summary: 'Strengthening command-line confidence, permission handling, and system-level understanding used in many security workflows.',
+    focus: ['Linux CLI', 'File Permissions', 'Processes', 'Networking Commands', 'Package Management'],
+    checkpoints: ['Privilege control', 'Service inspection', 'Log review'],
+    metrics: [
+      { label: 'Commands', value: '24', tone: 'green' },
+      { label: 'Labs', value: '9', tone: 'warm' },
+      { label: 'Progress', value: '68%', tone: 'blue' }
+    ]
+  },
+  {
+    id: 'web-security',
+    title: 'Web Security',
+    status: 'Learning',
+    summary: 'Exploring how web requests, sessions, and authentication work so weak points can be recognized and understood safely.',
+    focus: ['HTTP/HTTPS', 'Authentication', 'Sessions', 'Input Validation', 'OWASP Fundamentals'],
+    checkpoints: ['Request inspection', 'Session handling', 'Secure input review'],
+    metrics: [
+      { label: 'Topics', value: '11', tone: 'green' },
+      { label: 'Labs', value: '7', tone: 'warm' },
+      { label: 'Progress', value: '58%', tone: 'blue' }
+    ]
+  },
+  {
+    id: 'metasploit',
+    title: 'Metasploit Fundamentals',
+    status: 'Learning',
+    summary: 'Studying offensive security concepts in a controlled setting, focusing on understanding workflows rather than misuse.',
+    focus: ['Modules', 'Payload concepts', 'Exploitation concepts', 'Controlled lab practice'],
+    checkpoints: ['Module review', 'Payload understanding', 'Lab notes'],
+    metrics: [
+      { label: 'Modules', value: '8', tone: 'green' },
+      { label: 'Labs', value: '5', tone: 'warm' },
+      { label: 'Progress', value: '46%', tone: 'blue' }
+    ]
+  }
 ]
