@@ -1,0 +1,434 @@
+﻿import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Check, Code2, Coffee, Download, GitBranch, Mail, Network, Phone, Server, ShieldCheck } from 'lucide-react'
+import { motion } from 'framer-motion'
+import Terminal from '../components/Terminal'
+import ProjectCard from '../components/ProjectCard'
+import SectionHeading from '../components/SectionHeading'
+import IconCarousel from '../components/IconCarousel'
+import CyberLabCard from '../components/CyberLabCard'
+import CyberLabDetail from '../components/CyberLabDetail'
+import CyberLabTerminal from '../components/CyberLabTerminal'
+import { labCards, projects, repositories, skillGroups } from '../data/projects'
+import { getProjectFilters } from '../utils/portfolio'
+
+export default function HomePage({ navigateTo, filter, setFilter, activeLab, setActiveLab }) {
+  const projectFilters = getProjectFilters(projects)
+  const filteredProjects = filter === 'All' ? projects : projects.filter(project => project.category === filter)
+  const featuredProjects = filteredProjects.slice(0, 2)
+  const currentLab = labCards[activeLab] ?? labCards[0]
+  const currentLabMetrics = [
+    { label: 'Progress', value: `${currentLab.progress ?? 0}%`, tone: 'green' },
+    { label: 'Difficulty', value: currentLab.difficulty ?? 'Beginner', tone: 'warm' },
+    { label: 'Status', value: currentLab.status ?? 'Learning', tone: 'blue' }
+  ]
+  const currentLabTopics = currentLab.topics ?? currentLab.focus ?? []
+  const currentLabCheckpoints = currentLab.checkpoints ?? []
+
+  return (
+    <>
+      <section className="hero container">
+        <div className="hero-copy">
+          <div className="eyebrow"><span>00</span>Portfolio / 2026</div>
+          <p className="availability"><i /> Open to Opportunities</p>
+          <h1>Muhammad<br /><em>Syafiq</em></h1>
+          <p className="hero-positioning">Hospitality and operations professional building practical digital skills.</p>
+          <p className="hero-lead">Hospitality <b>•</b> Web Development <b>•</b> Cybersecurity</p>
+          <p className="hero-text">Adaptable and motivated, with front office experience and a growing technical background in web development, networking, Linux, and cybersecurity fundamentals.</p>
+
+          <div className="hero-actions">
+            <a className="button button-primary" href="#projects">View Projects <ArrowDownRight size={17} /></a>
+            <a className="button button-quiet" href="#contact">Contact Me <ArrowUpRight size={17} /></a>
+            <a className="cv-download" href="/Muhammad-Syafiq-CV.pdf" download>
+              <Download size={16} />
+              <span>Download CV</span>
+              <small>PDF</small>
+            </a>
+          </div>
+
+          <div className="hero-facts" aria-label="Quick profile facts">
+            <div>
+              <span>Primary focus</span>
+              <strong>Hospitality & Operations</strong>
+            </div>
+            <div>
+              <span>Technical focus</span>
+              <strong>React · Linux · Networking</strong>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-side">
+          <Terminal />
+          <div className="hero-note">
+            <div>
+              <span>Based in</span>
+              <strong>Karawang, West Java<br />Indonesia</strong>
+            </div>
+            <div>
+              <span>Available for</span>
+              <strong>Hospitality · Operations<br />Entry-level IT</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <IconCarousel />
+
+      <section id="about" className="section container profile-section">
+        <SectionHeading number="01" eyebrow="Profile" title="A practical professional with range.">
+          Hospitality and operations are the foundation. Technology is the discipline I am building alongside it.
+        </SectionHeading>
+
+        <div className="about-grid">
+          <div className="about-intro">
+            <span className="large-quote">“</span>
+            <p>I'm an adaptable and curious professional who works well with people, follows procedures, and stays calm while learning new systems.</p>
+            <p>My technical journey includes web development, databases, networking, Linux, and cybersecurity fundamentals. I enjoy building practical applications, understanding how systems work, and continuously improving both my technical and professional skills.</p>
+            <div className="profile-snapshot">
+              <div>
+                <span>Work style</span>
+                <strong>Adaptable · Detail-oriented</strong>
+              </div>
+              <div>
+                <span>Strength</span>
+                <strong>Service · Teamwork · Learning</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="pillar-grid">
+            {[
+              [Coffee, 'Hospitality', 'Customer service, teamwork, and SOP-led operations.'],
+              [Code2, 'Development', 'Practical web applications, databases, and responsive UI.'],
+              [ShieldCheck, 'Security', 'Networking, Linux, and controlled web security learning.']
+            ].map(([Icon, title, text]) => (
+              <div className="pillar" key={title}>
+                <Icon size={22} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" className="section section-tint">
+        <div className="container">
+          <SectionHeading number="02" eyebrow="Capabilities" title="Skills that travel well.">
+            A practical mix of people skills, technical fundamentals, and tools for learning quickly in new environments.
+          </SectionHeading>
+
+          <div className="skills-grid">
+            {skillGroups.map(([title, skills], index) => (
+              <article className={`skill-group ${index === 0 ? 'skill-group-primary' : ''}`} key={title}>
+                <div className="skill-group-top">
+                  <span className="skill-index">0{index + 1}</span>
+                  <span className="skill-count">{skills.length} skills</span>
+                </div>
+                <h3>{title}</h3>
+                <div className="badge-wrap">
+                  {skills.map(skill => <span className="badge" key={skill}>{skill}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" className="section container">
+        <SectionHeading number="03" eyebrow="Experience" title="Professional foundations.">
+          A first hospitality experience shaped around guest service, operational discipline, and working confidently with a team.
+        </SectionHeading>
+
+        <div className="experience-strip">
+          <div>
+            <span>Role</span>
+            <strong>Front Office Intern</strong>
+          </div>
+          <div>
+            <span>Environment</span>
+            <strong>Hotel operations</strong>
+          </div>
+          <div>
+            <span>Core practice</span>
+            <strong>Service & SOPs</strong>
+          </div>
+        </div>
+
+        <div className="experience-layout">
+          <div className="timeline">
+            <div className="timeline-item">
+              <span className="timeline-dot" />
+              <div>
+                <div className="meta-line">
+                  <span>01 / 2026</span>
+                  <span>1 Month</span>
+                </div>
+                <div className="role-heading">
+                  <div>
+                    <h3>Front Office Intern</h3>
+                    <p className="company">Royal Chulan Damansara — Malaysia</p>
+                  </div>
+                  <span className="role-tag">Hospitality</span>
+                </div>
+                <h4>What I contributed</h4>
+                <ul>
+                  <li>Assisted with daily Front Office and guest service activities.</li>
+                  <li>Supported customer service and administrative tasks according to hotel SOPs.</li>
+                  <li>Communicated professionally with guests and team members in a multicultural work environment.</li>
+                  <li>Adapted to a fast-paced hospitality environment and changing operational needs.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="training-card">
+            <div className="card-icon"><BriefcaseBusiness size={19} /></div>
+            <div className="training-heading">
+              <span className="eyebrow">Training</span>
+              <span className="training-status"><i />Completed training</span>
+            </div>
+            <h3>STAR4Hire Hospitality Training</h3>
+            <p>A compact foundation across service, operations, and workplace communication.</p>
+            <div className="training-list">
+              {['Front Office Fundamentals', 'Customer Service', 'Hospitality Operations', 'Barista Fundamentals', 'Workplace Communication', 'Teamwork & Professionalism'].map(item => (
+                <span key={item}><Check size={14} />{item}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="section section-tint">
+        <div className="container">
+          <SectionHeading number="04" eyebrow="Selected Work" title="Things I have built.">
+            Practical applications that show how I think, learn, and turn a problem into a working interface.
+          </SectionHeading>
+
+          <div className="filters" role="group" aria-label="Filter projects">
+            {projectFilters.map(item => (
+              <button
+                className={filter === item ? 'filter active' : 'filter'}
+                key={item}
+                onClick={() => setFilter(item)}
+                aria-pressed={filter === item}
+                type="button"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+
+          {featuredProjects.length ? (
+            <div className="projects-grid">
+              {featuredProjects.map(project => <ProjectCard project={project} key={project.id} />)}
+            </div>
+          ) : (
+            <div className="empty-state">
+              <ShieldCheck size={22} />
+              <strong>No projects in this category yet.</strong>
+              <span>Learning notes and controlled exercises will be added here as they become portfolio-ready.</span>
+            </div>
+          )}
+
+          <div className="see-more-wrap">
+            <button type="button" className="button button-primary" onClick={() => navigateTo('projects')}>
+              See more <ArrowUpRight size={17} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="cybersecurity" className="section container">
+        <div className="split-heading">
+          <SectionHeading number="05" eyebrow="Technical Learning" title="Cybersecurity Lab">
+            Learning by building, testing, and understanding systems. Exercises are performed in controlled laboratory environments for educational purposes.
+          </SectionHeading>
+          <Terminal security />
+        </div>
+
+        <div className="lab-context">
+          <div>
+            <span>Learning mode</span>
+            <strong>Controlled laboratory practice</strong>
+          </div>
+          <div>
+            <span>Current emphasis</span>
+            <strong>Networks · Linux · Web fundamentals</strong>
+          </div>
+          <div>
+            <span>Approach</span>
+            <strong>Learn · Build · Understand</strong>
+          </div>
+        </div>
+
+        <div className="lab-dashboard">
+          <div className="lab-dashboard-panel">
+            <div className="lab-dashboard-header">
+              <div>
+                <span className="lab-kicker">Active track</span>
+                <h3>{currentLab.title}</h3>
+              </div>
+              <span className="lab-status"><i />{currentLab.status}</span>
+            </div>
+
+            <div className="lab-dashboard-body">
+              <div className="lab-summary">
+                <p>{currentLab.objective ?? currentLab.summary ?? 'Learning focus is being prepared for this track.'}</p>
+                <div className="lab-metrics">
+                  {currentLabMetrics.map(metric => (
+                    <div className={`lab-metric lab-metric-${metric.tone}`} key={metric.label}>
+                      <span>{metric.label}</span>
+                      <strong>{metric.value}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="lab-focus-panel">
+                <h4>Current focus</h4>
+                <div className="topic-list">
+                  {currentLabTopics.map(topic => <span key={topic}>{topic}</span>)}
+                </div>
+                <div className="checkpoint-list">
+                  {currentLabCheckpoints.map(checkpoint => (
+                    <div key={checkpoint}><span />{checkpoint}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lab-grid">
+            {labCards.slice(0, 2).map((lab, index) => (
+              <CyberLabCard
+                key={lab.id}
+                lab={lab}
+                index={index}
+                active={activeLab === index}
+                onSelect={setActiveLab}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="lab-showcase">
+          <CyberLabDetail lab={currentLab} />
+          <CyberLabTerminal lab={currentLab} />
+        </div>
+
+        <div className="see-more-wrap">
+          <button type="button" className="button button-primary" onClick={() => navigateTo('cybersecurity-lab')}>
+            See more <ArrowUpRight size={17} />
+          </button>
+        </div>
+      </section>
+
+      <section className="section section-tint">
+        <div className="container">
+          <SectionHeading number="06" eyebrow="Next Chapter" title="Currently learning.">
+            A focused learning rhythm: strengthen fundamentals, build practical interfaces, and keep improving through small projects.
+          </SectionHeading>
+
+          <div className="focus-grid">
+            {[
+              ['01', 'Networking Fundamentals', 'TCP/IP, IP addressing, subnetting, DNS, DHCP.', 'Practicing', Network],
+              ['02', 'Linux', 'Command line, permissions, processes, system fundamentals.', 'Practicing', Server],
+              ['03', 'Web Development', 'React, modern frontend architecture, APIs.', 'Building', Code2],
+              ['04', 'Cybersecurity', 'Web security and cybersecurity fundamentals.', 'Learning', ShieldCheck]
+            ].map(([number, title, text, status, Icon]) => (
+              <motion.article className="focus-card" key={title} whileHover={{ y: -5 }}>
+                <div className="focus-top">
+                  <span>{number}</span>
+                  <strong>{status}</strong>
+                </div>
+                <Icon size={22} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <a href={title === 'Web Development' ? '#projects' : '#cybersecurity'}>
+                  Explore focus <ArrowUpRight size={14} />
+                </a>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section container activity-section">
+        <div className="activity-callout">
+          <div>
+            <div className="eyebrow"><span>07</span>Technical Activity</div>
+            <h2>Follow the work<br /><em>as it develops.</em></h2>
+            <p>Selected projects and experiments live on GitHub. The best work is always in progress.</p>
+            <div className="activity-status"><i />Maintained through personal projects and learning exercises</div>
+          </div>
+
+          <a className="button button-primary" href="https://github.com/Leoallogne" target="_blank" rel="noreferrer">
+            View GitHub <GitBranch size={17} />
+          </a>
+        </div>
+
+        <div className="repository-grid">
+          {repositories.map(repo => (
+            <article className="repository-card" key={repo.title}>
+              <div className="repository-top">
+                <GitBranch size={17} />
+                <span>{repo.language}</span>
+              </div>
+              <h3>{repo.title}</h3>
+              <p>{repo.description}</p>
+              {repo.href ? (
+                <a href={repo.href} target="_blank" rel="noreferrer">
+                  Open repository <ArrowUpRight size={15} />
+                </a>
+              ) : (
+                <span className="link-muted">Repository link pending</span>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="contact" className="contact-section">
+        <div className="container contact-inner">
+          <div>
+            <div className="eyebrow"><span>08</span>Contact</div>
+            <h2>Let's connect.</h2>
+            <p>Have an opportunity, project, or collaboration in mind? I'm open to learning, working, and exploring new opportunities.</p>
+
+            <div className="contact-actions">
+              <a className="contact-action-primary" href="mailto:leoallogne@gmail.com">
+                Email me <Mail size={16} />
+              </a>
+              <a className="contact-action-secondary" href="https://wa.me/6282249999852" target="_blank" rel="noreferrer">
+                WhatsApp <ArrowUpRight size={16} />
+              </a>
+            </div>
+          </div>
+
+          <div className="contact-details">
+            <a href="mailto:leoallogne@gmail.com">
+              <Mail size={19} />
+              <span>Email <strong>leoallogne@gmail.com</strong></span>
+              <ArrowUpRight size={17} />
+            </a>
+            <a href="tel:+6282249999852">
+              <Phone size={19} />
+              <span>Phone <strong>+62 8224 9999 852</strong></span>
+              <ArrowUpRight size={17} />
+            </a>
+            <a href="https://wa.me/6282249999852" target="_blank" rel="noreferrer">
+              <Phone size={19} />
+              <span>WhatsApp <strong>Chat on WhatsApp</strong></span>
+              <ArrowUpRight size={17} />
+            </a>
+            <a href="https://github.com/Leoallogne" target="_blank" rel="noreferrer">
+              <GitBranch size={19} />
+              <span>GitHub <strong>github.com/Leoallogne</strong></span>
+              <ArrowUpRight size={17} />
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
