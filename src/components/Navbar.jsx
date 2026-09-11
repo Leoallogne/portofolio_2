@@ -91,9 +91,9 @@ export default function Navbar({ theme, toggleTheme, page = 'home', onNavigate }
   }
 
   return (
-    <header className="nav-wrap">
-      <nav className="nav container" aria-label="Main navigation">
-        <a className="brand" href="#top" onClick={handleBrandClick}>
+    <header className="nav-wrap sticky-top">
+      <nav className="nav container navbar navbar-expand-lg" aria-label="Main navigation">
+        <a className="brand navbar-brand" href="#top" onClick={handleBrandClick}>
           <span className="brand-mark">MS</span>
           <span>Muhammad Syafiq</span>
         </a>

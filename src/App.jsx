@@ -40,26 +40,28 @@ function App() {
   }
 
   return (
-    <div id="top">
+    <div id="top" className="min-vh-100 d-flex flex-column">
       <Navbar
         theme={theme}
         toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         page={view}
         onNavigate={navigateTo}
       />
-      {view === 'projects' ? (
-        <ProjectsPage navigateTo={navigateTo} />
-      ) : view === 'cybersecurity-lab' ? (
-        <CyberLabPage navigateTo={navigateTo} />
-      ) : (
-        <HomePage
-          navigateTo={navigateTo}
-          filter={filter}
-          setFilter={setFilter}
-          activeLab={activeLab}
-          setActiveLab={setActiveLab}
-        />
-      )}
+      <main className="flex-grow-1">
+        {view === 'projects' ? (
+          <ProjectsPage navigateTo={navigateTo} />
+        ) : view === 'cybersecurity-lab' ? (
+          <CyberLabPage navigateTo={navigateTo} />
+        ) : (
+          <HomePage
+            navigateTo={navigateTo}
+            filter={filter}
+            setFilter={setFilter}
+            activeLab={activeLab}
+            setActiveLab={setActiveLab}
+          />
+        )}
+      </main>
       <Footer onNavigate={navigateTo} page={view} />
       <BackToTop />
     </div>

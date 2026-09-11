@@ -90,13 +90,13 @@ export default function CyberLabTerminal({ lab }) {
   )
 
   return (
-    <div className="lab-terminal-shell">
-      <div className="terminal-top">
+    <div className="lab-terminal-shell card border-0 shadow-sm h-100">
+      <div className="terminal-top card-header bg-transparent border-0 d-flex justify-content-between align-items-center px-3 py-2">
         <span className="terminal-dots"><i /><i /><i /></span>
-        <span><TerminalIcon size={14} /> {lab.id}-simulator</span>
+        <span className="text-body-secondary small"><TerminalIcon size={14} /> {lab.id}-simulator</span>
       </div>
 
-      <div className="lab-terminal-body" ref={terminalBodyRef} aria-live="polite">
+      <div className="lab-terminal-body card-body p-0" ref={terminalBodyRef} aria-live="polite">
         {entries.map((entry, index) => (
           <div className={`terminal-line ${entry.type}`} key={`${entry.type}-${index}`}>
             {entry.type === 'command' ? (
@@ -112,7 +112,7 @@ export default function CyberLabTerminal({ lab }) {
         ))}
       </div>
 
-      <form className="terminal-form" onSubmit={handleSubmit}>
+      <form className="terminal-form card-footer bg-transparent border-0 p-3 d-flex align-items-center gap-2" onSubmit={handleSubmit}>
         <label htmlFor={`lab-command-${lab.id}`} className="sr-only">Command input</label>
         <span className="terminal-prompt">$</span>
         <input
@@ -125,19 +125,20 @@ export default function CyberLabTerminal({ lab }) {
           spellCheck={false}
           placeholder="Enter command (e.g. help, ping, scan)"
           aria-label={`Interactive terminal for ${lab.title}`}
+          className="form-control form-control-sm"
         />
-        <button type="submit" className="button button-primary terminal-submit">
+        <button type="submit" className="btn btn-primary btn-sm terminal-submit">
           Run
         </button>
       </form>
 
       {input && commandSuggestions.length > 0 && (
-        <div className="command-hint" aria-label="Command suggestions">
+        <div className="command-hint px-3 pb-3" aria-label="Command suggestions">
           {commandSuggestions.map(command => (
             <button
               key={command}
               type="button"
-              className="command-hint-item"
+              className="command-hint-item btn btn-sm btn-outline-secondary me-2 mb-2"
               onClick={() => {
                 setInput(command)
                 inputRef.current?.focus()
@@ -150,22 +151,24 @@ export default function CyberLabTerminal({ lab }) {
       )}
 
       {history.length > 0 && (
-        <div className="history-panel" aria-label="Command history">
-          <span>History</span>
-          {history.slice(-4).map((entry, index) => (
-            <button
-              key={`${entry}-${index}`}
-              type="button"
-              className="history-pill"
-              onClick={() => {
-                setInput(entry)
-                inputRef.current?.focus()
-              }}
-              title={`Click to copy "${entry}" to input`}
-            >
-              {entry}
-            </button>
-          ))}
+        <div className="history-panel px-3 pb-3" aria-label="Command history">
+          <span className="d-block mb-2 small text-body-secondary">History</span>
+          <div className="d-flex flex-wrap gap-2">
+            {history.slice(-4).map((entry, index) => (
+              <button
+                key={`${entry}-${index}`}
+                type="button"
+                className="history-pill btn btn-sm btn-outline-light border-secondary-subtle"
+                onClick={() => {
+                  setInput(entry)
+                  inputRef.current?.focus()
+                }}
+                title={`Click to copy "${entry}" to input`}
+              >
+                {entry}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>

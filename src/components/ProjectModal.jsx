@@ -92,7 +92,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
         >
           <motion.div
             ref={modalRef}
-            className="project-modal"
+            className="project-modal modal-dialog modal-dialog-centered modal-dialog-scrollable"
             role="dialog"
             aria-modal="true"
             aria-labelledby={`project-modal-title-${project.id}`}
@@ -102,14 +102,15 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             exit={reduceMotion ? undefined : { opacity: 0, y: 12, scale: 0.985 }}
             transition={{ duration: 0.2 }}
           >
-            <div className={`modal-visual project-visual-${project.id}`}>
-              <span>{project.preview}</span>
-              <div className="preview-window"><i /><i /><i /></div>
-              <div className="preview-lines"><b /><b /><b /></div>
-            </div>
+            <div className="modal-content border-0 overflow-hidden">
+              <div className={`modal-visual project-visual-${project.id}`}>
+                <span>{project.preview}</span>
+                <div className="preview-window"><i /><i /><i /></div>
+                <div className="preview-lines"><b /><b /><b /></div>
+              </div>
 
-            <div className="modal-content">
-              <div className="modal-header">
+              <div className="p-4 p-md-5">
+                <div className="modal-header align-items-start px-0 py-0">
                 <div>
                   <div className="modal-meta">
                     <span className="project-number">PROJECT / {project.id}</span>
@@ -132,11 +133,11 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 </button>
               </div>
 
-              <p id={`project-modal-description-${project.id}`} className="modal-description">
-                {project.description}
-              </p>
+                <p id={`project-modal-description-${project.id}`} className="modal-description">
+                  {project.description}
+                </p>
 
-              <div className="modal-columns">
+                <div className="modal-columns">
                 <div>
                   <span className="modal-label">Overview</span>
                   <ul className="modal-features">
@@ -199,24 +200,25 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 </section>
               </div>
 
-              <div className="modal-actions">
-                {project.github && (
-                  <a className="button button-primary" href={project.github} target="_blank" rel="noreferrer">
-                    <GitBranch size={15} />
-                    GitHub
-                  </a>
-                )}
+                <div className="modal-actions d-flex flex-wrap gap-2 mt-4">
+                  {project.github && (
+                    <a className="btn btn-primary" href={project.github} target="_blank" rel="noreferrer">
+                      <GitBranch size={15} />
+                      GitHub
+                    </a>
+                  )}
 
-                {project.demo && (
-                  <a className="button button-quiet" href={project.demo} target="_blank" rel="noreferrer">
-                    <ExternalLink size={15} />
-                    Live demo
-                  </a>
-                )}
+                  {project.demo && (
+                    <a className="btn btn-outline-secondary" href={project.demo} target="_blank" rel="noreferrer">
+                      <ExternalLink size={15} />
+                      Live demo
+                    </a>
+                  )}
 
-                {!project.github && !project.demo && (
-                  <span className="modal-unavailable">Repository and demo are still being prepared.</span>
-                )}
+                  {!project.github && !project.demo && (
+                    <span className="modal-unavailable">Repository and demo are still being prepared.</span>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>
