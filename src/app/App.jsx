@@ -5,25 +5,14 @@ import BackToTop from '../components/layout/BackToTop'
 import HomePage from '../pages/HomePage'
 import ProjectsPage from '../pages/ProjectsPage'
 import CyberLabPage from '../pages/CyberLabPage'
-import { getCurrentPage, getNextTheme, getStoredTheme, storeTheme } from '../utils/portfolio'
+import { getCurrentPage } from '../utils/portfolio'
 
 function App() {
-  const [theme, setTheme] = useState(getStoredTheme)
   const [filter, setFilter] = useState('All')
   const [activeLab, setActiveLab] = useState(0)
 
   const [view, setView] = useState(getCurrentPage)
   const [pendingSection, setPendingSection] = useState(null)
-
-  const toggleTheme = () => {
-    setTheme(currentTheme => getNextTheme(currentTheme))
-  }
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f7f7f5' : '#111820')
-    storeTheme(undefined, theme)
-  }, [theme])
 
   useEffect(() => {
     const handlePopState = () => {
@@ -57,8 +46,6 @@ function App() {
   return (
     <div id="top" className="app-shell">
       <Navbar
-        theme={theme}
-        toggleTheme={toggleTheme}
         page={view}
         onNavigate={navigateTo}
       />

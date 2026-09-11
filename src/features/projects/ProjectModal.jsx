@@ -2,6 +2,7 @@ import { Check, ExternalLink, GitBranch, X } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { useEffect, useRef } from 'react'
+import ProjectPreview from './ProjectPreview'
 
 export default function ProjectModal({ project, isOpen, onClose }) {
   const reduceMotion = useReducedMotion()
@@ -101,9 +102,8 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           >
             <div className="project-modal-content">
               <div className={`modal-visual project-visual-${project.id}`}>
-                <span>{project.preview}</span>
-                <div className="preview-window"><i /><i /><i /></div>
-                <div className="preview-lines"><b /><b /><b /></div>
+                <span className="project-visual-label">{project.preview}</span>
+                <ProjectPreview project={project} />
               </div>
 
               <div className="project-dialog-body">
@@ -133,6 +133,22 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 <p id={`project-modal-description-${project.id}`} className="modal-description">
                   {project.description}
                 </p>
+
+                <div className="modal-actions modal-actions-top">
+                  {project.demo && (
+                    <a className="button button-primary" href={project.demo} target="_blank" rel="noreferrer">
+                      <ExternalLink size={15} />
+                      Live demo
+                    </a>
+                  )}
+                  {project.github && (
+                    <a className="button button-quiet" href={project.github} target="_blank" rel="noreferrer">
+                      <GitBranch size={15} />
+                      GitHub
+                    </a>
+                  )}
+                  {!project.github && !project.demo && <span className="modal-unavailable">Repository and demo are still being prepared.</span>}
+                </div>
 
                 <div className="modal-columns">
                 <div>
@@ -197,25 +213,6 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 </section>
               </div>
 
-                <div className="modal-actions">
-                  {project.github && (
-                    <a className="button button-primary" href={project.github} target="_blank" rel="noreferrer">
-                      <GitBranch size={15} />
-                      GitHub
-                    </a>
-                  )}
-
-                  {project.demo && (
-                    <a className="button button-quiet" href={project.demo} target="_blank" rel="noreferrer">
-                      <ExternalLink size={15} />
-                      Live demo
-                    </a>
-                  )}
-
-                  {!project.github && !project.demo && (
-                    <span className="modal-unavailable">Repository and demo are still being prepared.</span>
-                  )}
-                </div>
               </div>
             </div>
           </motion.div>

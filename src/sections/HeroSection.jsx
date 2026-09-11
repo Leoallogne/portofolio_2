@@ -8,9 +8,9 @@ export default function HeroSection() {
         <div className="eyebrow"><span>00</span>Portfolio / 2026</div>
         <p className="availability"><i /> Open to Opportunities</p>
         <h1>Muhammad<br /><em>Syafiq</em></h1>
-        <p className="hero-positioning">Hospitality and operations professional building practical digital skills.</p>
-        <p className="hero-lead">Hospitality <b>•</b> Web Development <b>•</b> Cybersecurity</p>
-        <p className="hero-text">Adaptable and motivated, with front office experience and a growing technical background in web development, networking, Linux, and cybersecurity fundamentals.</p>
+        <p className="hero-positioning">Web Developer with hospitality and operations experience.</p>
+        <p className="hero-lead">React <b>•</b> Laravel <b>•</b> MongoDB</p>
+        <p className="hero-text">I build practical web experiences with a strong operations mindset while developing deeper foundations in Linux, networking, and cybersecurity.</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#projects">View Projects <ArrowDownRight size={17} /></a>
           <a className="button button-quiet" href="#contact">Contact Me <ArrowUpRight size={17} /></a>

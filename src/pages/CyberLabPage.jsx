@@ -115,8 +115,8 @@ export default function CyberLabPage({ navigateTo }) {
         </div>
 
         <div className="lab-showcase">
-          <CyberLabDetail lab={currentLab} />
           <CyberLabTerminal key={currentLab.id} lab={currentLab} />
+          <CyberLabDetail lab={currentLab} />
         </div>
       </section>
     </div>

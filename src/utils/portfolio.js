@@ -1,39 +1,3 @@
-function getDefaultStorage() {
-  try {
-    return globalThis.localStorage
-  } catch {
-    return null
-  }
-}
-
-export const themes = ['dark', 'light']
-
-export function getStoredTheme(storage = getDefaultStorage()) {
-  try {
-    const storedTheme = storage?.getItem('theme')
-    return themes.includes(storedTheme) ? storedTheme : 'light'
-  } catch {
-    return 'light'
-  }
-}
-
-export function storeTheme(storage = getDefaultStorage(), theme) {
-  if (!storage || !themes.includes(theme)) {
-    return false
-  }
-
-  try {
-    storage.setItem('theme', theme)
-  } catch {
-    return false
-  }
-  return true
-}
-
-export function getNextTheme(theme) {
-  return theme === 'dark' ? 'light' : 'dark'
-}
-
 export function getProjectFilters(projectList) {
   return ['All', ...new Set(projectList.map(project => project.category))]
 }

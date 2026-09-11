@@ -179,7 +179,7 @@ Bila environment mendukung:
 - [ ] Navbar drawer open/close.
 - [ ] Escape drawer.
 - [ ] Focus return drawer.
-- [ ] Theme toggle.
+- [x] Light-only theme is enforced without theme controls or persistence.
 - [ ] Project filter.
 - [ ] Project modal open/close.
 - [ ] Escape modal.
@@ -439,7 +439,7 @@ Final acceptance:
 - [ ] Cyber Lab bekerja.
 - [ ] Interactive terminal bekerja.
 - [ ] Project modal bekerja.
-- [ ] Theme toggle bekerja.
+- [x] Light-only theme remains consistent.
 - [ ] Navbar bekerja.
 - [ ] Footer bekerja.
 - [ ] Responsive behavior bekerja.

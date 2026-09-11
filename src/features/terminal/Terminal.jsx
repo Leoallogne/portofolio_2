@@ -12,7 +12,9 @@ export default function Terminal({ security = false }) {
       ]
     : [
         ['whoami', 'Muhammad Syafiq'],
-        ['role', 'Hospitality / Web Development / Cybersecurity'],
+        ['focus', 'Web Development'],
+        ['stack', 'React · Laravel · MongoDB'],
+        ['learning', 'Linux · Networking · Cybersecurity'],
         ['location', 'Karawang, Indonesia'],
         ['status', 'Open to Opportunities']
       ]

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { projects, repositories } from '../src/data/projects.js'
 import { cyberLabs } from '../src/data/cyberLabs.js'
 import { skillGroups } from '../src/data/skills.js'
-import { getCurrentPage, getNextTheme, getProjectFilters, getProjectStats, getStoredTheme, storeTheme } from '../src/utils/portfolio.js'
+import { getCurrentPage, getProjectFilters, getProjectStats } from '../src/utils/portfolio.js'
 import { defaultResponses, getCommandSuggestions, resolveCommand } from '../src/utils/terminal.js'
 
 test('project filters contain only categories present in project data', () => {
@@ -67,36 +67,3 @@ test('repository cards are derived from project data', () => {
   assert.deepEqual(repositories, projects.map(project => ({ ...project.repository, href: project.github })))
 })
 
-test('theme storage falls back safely when storage is unavailable', () => {
-  const blockedStorage = {
-    getItem() { throw new Error('Storage blocked') },
-    setItem() { throw new Error('Storage blocked') }
-  }
-
-  assert.equal(getStoredTheme(blockedStorage), 'light')
-  assert.equal(storeTheme(blockedStorage, 'light'), false)
-  assert.equal(storeTheme(null, 'light'), false)
-})
-
-test('theme toggle alternates only between supported themes', () => {
-  assert.equal(getNextTheme('dark'), 'light')
-  assert.equal(getNextTheme('light'), 'dark')
-  assert.equal(getNextTheme('unexpected'), 'dark')
-})
-
-test('theme storage rejects invalid values', () => {
-  const storage = { getItem: () => 'blue' }
-  assert.equal(getStoredTheme(storage), 'light')
-})
-
-test('theme storage reads and writes valid values', () => {
-  const values = new Map()
-  const storage = {
-    getItem(key) { return values.get(key) ?? null },
-    setItem(key, value) { values.set(key, value) }
-  }
-
-  assert.equal(getStoredTheme(storage), 'light')
-  assert.equal(storeTheme(storage, 'light'), true)
-  assert.equal(getStoredTheme(storage), 'light')
-})

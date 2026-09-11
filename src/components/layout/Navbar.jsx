@@ -1,10 +1,10 @@
-import { Download, Moon, Sun } from 'lucide-react'
+import { Download } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const sectionLinks = [['About', 'about'], ['Skills', 'skills'], ['Experience', 'experience'], ['Projects', 'projects'], ['Cybersecurity', 'cybersecurity'], ['Contact', 'contact']]
 const archiveLinks = [['Home', 'home'], ['Selected Work', 'projects'], ['Cybersecurity Lab', 'cybersecurity-lab']]
 
-export default function Navbar({ theme, toggleTheme, page = 'home', onNavigate }) {
+export default function Navbar({ page = 'home', onNavigate }) {
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('about')
   const menuButtonRef = useRef(null)
@@ -161,16 +161,6 @@ export default function Navbar({ theme, toggleTheme, page = 'home', onNavigate }
             <small>PDF</small>
           </a>
 
-          <button
-            className="icon-button drawer-theme theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-            aria-pressed={theme === 'light'}
-            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-          >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            <span>{theme === 'dark' ? 'Light theme' : 'Dark theme'}</span>
-          </button>
         </div>
       </nav>
     </header>

@@ -16,7 +16,7 @@ The positioning is professional first and technical second, with real project wo
 ## Features
 
 - Responsive single-page layout for desktop, tablet, and mobile
-- Dark and light themes with `localStorage` persistence
+- Light-only editorial design system
 - Sticky navigation with active-section indicator
 - Mobile navigation with accessible ARIA states
 - Project filtering with graceful empty states
