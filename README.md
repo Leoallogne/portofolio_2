@@ -66,6 +66,7 @@ The development server will print the local URL in the terminal.
 
 ```bash
 npm run lint
+npm run test
 npm run build
 npm run preview
 ```
@@ -89,10 +90,17 @@ src/
 		Footer.jsx
 		Navbar.jsx
 		ProjectCard.jsx
+		ProjectModal.jsx
 		SectionHeading.jsx
 		Terminal.jsx
+		CyberLabDetail.jsx
+		CyberLabTerminal.jsx
 	data/
 		projects.js
+		cyberLabs.js
+	utils/
+		portfolio.js
+		terminal.js
 	App.jsx
 	index.css
 	main.jsx

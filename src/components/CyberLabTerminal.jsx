@@ -1,25 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Terminal as TerminalIcon } from 'lucide-react'
-
-const SAFE_COMMANDS = ['help', 'clear', 'whoami', 'pwd', 'ls', 'cat', 'ip addr', 'ping', 'scan', 'history']
-
-const defaultResponses = {
-  help: {
-    output: [
-      'Available commands:',
-      'help, clear, whoami, pwd, ls, cat, ip addr, ping, scan, history'
-    ]
-  },
-  clear: { output: [] },
-  whoami: { output: ['cyber-operator@portfolio-lab'] },
-  pwd: { output: ['/workspace'] },
-  ls: { output: ['labs/', 'commands/', 'notes/'] },
-  cat: { output: ['Controlled lab simulator active. Use the commands below to inspect the current scenario.'] },
-  'ip addr': { output: ['eth0: 172.16.0.15/24', 'lo: 127.0.0.1/8'] },
-  ping: { output: ['PING 172.16.0.1 (172.16.0.1): 56 data bytes', '64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.5ms'] },
-  scan: { output: ['Available targets:', 'gateway', 'services', 'workstation'] },
-  history: { output: ['help', 'whoami', 'ls'] }
-}
+import { defaultResponses, getCommandSuggestions, resolveCommand } from '../utils/terminal'
 
 export default function CyberLabTerminal({ lab }) {
   const inputRef = useRef(null)
@@ -63,20 +44,22 @@ export default function CyberLabTerminal({ lab }) {
     }
 
     const nextHistory = [...history, rawTrimmed]
-    setHistory(nextHistory)
 
     if (commandKey === 'clear') {
+      setHistory([])
       setEntries([
         { type: 'system', value: lab.terminalIntro[0] },
         { type: 'system', value: lab.terminalIntro[1] }
       ])
     } else {
+      setHistory(nextHistory)
+      const response = resolveCommand(commandKey, commandMap, nextHistory.slice(0, -1))
       setEntries(currentEntries => [
         ...currentEntries,
         { type: 'command', value: rawTrimmed },
         {
           type: 'result',
-          value: commandMap[commandKey]?.output ?? ['command not recognized. Try help.']
+          value: response.length ? response : ['No commands in history yet.']
         }
       ])
     }
@@ -85,18 +68,16 @@ export default function CyberLabTerminal({ lab }) {
     requestAnimationFrame(() => inputRef.current?.focus())
   }
 
-  const commandSuggestions = SAFE_COMMANDS.filter(command =>
-    command.startsWith(input.trim().toLowerCase()) && command !== input.trim().toLowerCase()
-  )
+  const commandSuggestions = getCommandSuggestions(input)
 
   return (
-    <div className="lab-terminal-shell card border-0 shadow-sm h-100">
-      <div className="terminal-top card-header bg-transparent border-0 d-flex justify-content-between align-items-center px-3 py-2">
+    <div className="lab-terminal-shell">
+      <div className="terminal-top">
         <span className="terminal-dots"><i /><i /><i /></span>
-        <span className="text-body-secondary small"><TerminalIcon size={14} /> {lab.id}-simulator</span>
+        <span><TerminalIcon size={14} /> {lab.id}-simulator</span>
       </div>
 
-      <div className="lab-terminal-body card-body p-0" ref={terminalBodyRef} aria-live="polite">
+      <div className="lab-terminal-body" ref={terminalBodyRef} aria-live="polite">
         {entries.map((entry, index) => (
           <div className={`terminal-line ${entry.type}`} key={`${entry.type}-${index}`}>
             {entry.type === 'command' ? (
@@ -112,8 +93,8 @@ export default function CyberLabTerminal({ lab }) {
         ))}
       </div>
 
-      <form className="terminal-form card-footer bg-transparent border-0 p-3 d-flex align-items-center gap-2" onSubmit={handleSubmit}>
-        <label htmlFor={`lab-command-${lab.id}`} className="sr-only">Command input</label>
+      <form className="terminal-form" onSubmit={handleSubmit}>
+        <label className="sr-only" htmlFor={`lab-command-${lab.id}`}>Command input</label>
         <span className="terminal-prompt">$</span>
         <input
           ref={inputRef}
@@ -125,20 +106,20 @@ export default function CyberLabTerminal({ lab }) {
           spellCheck={false}
           placeholder="Enter command (e.g. help, ping, scan)"
           aria-label={`Interactive terminal for ${lab.title}`}
-          className="form-control form-control-sm"
+          className="terminal-input"
         />
-        <button type="submit" className="btn btn-primary btn-sm terminal-submit">
+        <button type="submit" className="button button-primary terminal-submit">
           Run
         </button>
       </form>
 
       {input && commandSuggestions.length > 0 && (
-        <div className="command-hint px-3 pb-3" aria-label="Command suggestions">
+        <div className="command-hint" aria-label="Command suggestions">
           {commandSuggestions.map(command => (
             <button
               key={command}
               type="button"
-              className="command-hint-item btn btn-sm btn-outline-secondary me-2 mb-2"
+              className="command-hint-item"
               onClick={() => {
                 setInput(command)
                 inputRef.current?.focus()
@@ -151,19 +132,19 @@ export default function CyberLabTerminal({ lab }) {
       )}
 
       {history.length > 0 && (
-        <div className="history-panel px-3 pb-3" aria-label="Command history">
-          <span className="d-block mb-2 small text-body-secondary">History</span>
-          <div className="d-flex flex-wrap gap-2">
+        <div className="history-panel" aria-label="Command history">
+          <span>History</span>
+          <div className="history-list">
             {history.slice(-4).map((entry, index) => (
               <button
                 key={`${entry}-${index}`}
                 type="button"
-                className="history-pill btn btn-sm btn-outline-light border-secondary-subtle"
+                className="history-pill"
                 onClick={() => {
                   setInput(entry)
                   inputRef.current?.focus()
                 }}
-                title={`Click to copy "${entry}" to input`}
+                title={`Load "${entry}" into the command input`}
               >
                 {entry}
               </button>

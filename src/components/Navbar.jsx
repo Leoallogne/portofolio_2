@@ -92,8 +92,8 @@ export default function Navbar({ theme, toggleTheme, page = 'home', onNavigate }
 
   return (
     <header className="nav-wrap sticky-top">
-      <nav className="nav container navbar navbar-expand-lg" aria-label="Main navigation">
-        <a className="brand navbar-brand" href="#top" onClick={handleBrandClick}>
+      <nav className="nav container" aria-label="Main navigation">
+        <a className="brand" href="#top" onClick={handleBrandClick}>
           <span className="brand-mark">MS</span>
           <span>Muhammad Syafiq</span>
         </a>
@@ -162,9 +162,11 @@ export default function Navbar({ theme, toggleTheme, page = 'home', onNavigate }
           </a>
 
           <button
-            className="icon-button drawer-theme"
+            className="icon-button drawer-theme theme-toggle"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            aria-pressed={theme === 'light'}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             <span>{theme === 'dark' ? 'Light theme' : 'Dark theme'}</span>

@@ -1,5 +1,6 @@
 import { Check, ExternalLink, GitBranch, X } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { createPortal } from 'react-dom'
 import { useEffect, useRef } from 'react'
 
 export default function ProjectModal({ project, isOpen, onClose }) {
@@ -60,26 +61,22 @@ export default function ProjectModal({ project, isOpen, onClose }) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.classList.add('modal-open')
 
-    const backgrounds = Array.from(document.querySelectorAll('.project-card'))
-    backgrounds.forEach(card => {
-      card.setAttribute('aria-hidden', 'true')
-      card.setAttribute('inert', 'true')
-    })
+    const appRoot = document.getElementById('root')
+    appRoot?.setAttribute('aria-hidden', 'true')
+    appRoot?.setAttribute('inert', 'true')
 
     requestAnimationFrame(() => closeButtonRef.current?.focus())
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.body.classList.remove('modal-open')
-      backgrounds.forEach(card => {
-        card.removeAttribute('aria-hidden')
-        card.removeAttribute('inert')
-      })
+      appRoot?.removeAttribute('aria-hidden')
+      appRoot?.removeAttribute('inert')
       previousFocus?.focus?.()
     }
   }, [isOpen, onClose])
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -92,7 +89,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
         >
           <motion.div
             ref={modalRef}
-            className="project-modal modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            className="project-modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby={`project-modal-title-${project.id}`}
@@ -102,15 +99,15 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             exit={reduceMotion ? undefined : { opacity: 0, y: 12, scale: 0.985 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="modal-content border-0 overflow-hidden">
+            <div className="project-modal-content">
               <div className={`modal-visual project-visual-${project.id}`}>
                 <span>{project.preview}</span>
                 <div className="preview-window"><i /><i /><i /></div>
                 <div className="preview-lines"><b /><b /><b /></div>
               </div>
 
-              <div className="p-4 p-md-5">
-                <div className="modal-header align-items-start px-0 py-0">
+              <div className="project-dialog-body">
+                <div className="modal-header">
                 <div>
                   <div className="modal-meta">
                     <span className="project-number">PROJECT / {project.id}</span>
@@ -200,16 +197,16 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 </section>
               </div>
 
-                <div className="modal-actions d-flex flex-wrap gap-2 mt-4">
+                <div className="modal-actions">
                   {project.github && (
-                    <a className="btn btn-primary" href={project.github} target="_blank" rel="noreferrer">
+                    <a className="button button-primary" href={project.github} target="_blank" rel="noreferrer">
                       <GitBranch size={15} />
                       GitHub
                     </a>
                   )}
 
                   {project.demo && (
-                    <a className="btn btn-outline-secondary" href={project.demo} target="_blank" rel="noreferrer">
+                    <a className="button button-quiet" href={project.demo} target="_blank" rel="noreferrer">
                       <ExternalLink size={15} />
                       Live demo
                     </a>
@@ -225,5 +222,6 @@ export default function ProjectModal({ project, isOpen, onClose }) {
         </motion.div>
       )}
     </AnimatePresence>
+    , document.body
   )
 }

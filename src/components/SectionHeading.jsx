@@ -1,12 +1,12 @@
 export default function SectionHeading({ number, eyebrow, title, children }) {
   return (
-    <div className="section-heading mb-5">
-      <div className="eyebrow text-uppercase mb-3">
+    <div className="section-heading">
+      <div className="eyebrow">
         <span>{number}</span>
         {eyebrow}
       </div>
-      <h2 className="mb-3">{title}</h2>
-      {children && <p className="mb-0">{children}</p>}
+      <h2>{title}</h2>
+      {children && <p>{children}</p>}
     </div>
   )
 }

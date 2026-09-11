@@ -5,49 +5,64 @@ import BackToTop from './components/BackToTop'
 import HomePage from './pages/HomePage'
 import ProjectsPage from './pages/ProjectsPage'
 import CyberLabPage from './pages/CyberLabPage'
-import { getStoredTheme, storeTheme } from './utils/portfolio'
+import { getCurrentPage, getNextTheme, getStoredTheme, storeTheme } from './utils/portfolio'
 
 function App() {
   const [theme, setTheme] = useState(getStoredTheme)
   const [filter, setFilter] = useState('All')
   const [activeLab, setActiveLab] = useState(0)
 
-  const getCurrentView = () => {
-    const page = new URLSearchParams(window.location.search).get('page')
-    return page === 'projects' || page === 'cybersecurity-lab' ? page : 'home'
-  }
+  const [view, setView] = useState(getCurrentPage)
+  const [pendingSection, setPendingSection] = useState(null)
 
-  const [view, setView] = useState(getCurrentView)
+  const toggleTheme = () => {
+    setTheme(currentTheme => getNextTheme(currentTheme))
+  }
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f3f5f2' : '#0b0f14')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f7f7f5' : '#111820')
     storeTheme(undefined, theme)
   }, [theme])
 
   useEffect(() => {
-    const handlePopState = () => setView(getCurrentView())
+    const handlePopState = () => {
+      setPendingSection(null)
+      setView(getCurrentPage())
+    }
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  const navigateTo = nextView => {
+  useEffect(() => {
+    if (pendingSection && view === 'home') {
+      requestAnimationFrame(() => {
+        document.getElementById(pendingSection)?.scrollIntoView({ behavior: 'smooth' })
+        setPendingSection(null)
+      })
+    }
+  }, [pendingSection, view])
+
+  const navigateTo = (nextView, sectionId = null) => {
     const basePath = window.location.pathname || '/'
     const nextUrl = nextView === 'home' ? basePath : `${basePath}?page=${nextView}`
     setView(nextView)
+    setPendingSection(sectionId)
     window.history.pushState({}, '', nextUrl)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (!sectionId) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   return (
-    <div id="top" className="min-vh-100 d-flex flex-column">
+    <div id="top" className="app-shell">
       <Navbar
         theme={theme}
-        toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        toggleTheme={toggleTheme}
         page={view}
         onNavigate={navigateTo}
       />
-      <main className="flex-grow-1">
+      <main className="app-main">
         {view === 'projects' ? (
           <ProjectsPage navigateTo={navigateTo} />
         ) : view === 'cybersecurity-lab' ? (

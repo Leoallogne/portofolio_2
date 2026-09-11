@@ -2,13 +2,16 @@
 import SectionHeading from '../components/SectionHeading'
 import ProjectCard from '../components/ProjectCard'
 import { projects } from '../data/projects'
+import { getProjectStats } from '../utils/portfolio'
 
 export default function ProjectsPage({ navigateTo }) {
+  const stats = getProjectStats(projects)
+
   return (
-    <main className="archive-page">
+    <div className="archive-page">
       <section className="section container">
         <div className="archive-topbar">
-          <button type="button" className="btn btn-outline-secondary archive-back-button" onClick={() => navigateTo('home')}>
+          <button type="button" className="button button-quiet archive-back-button" onClick={() => navigateTo('home')}>
             <ChevronLeft size={17} />
             <span>Back to home</span>
           </button>
@@ -34,29 +37,21 @@ export default function ProjectsPage({ navigateTo }) {
           </div>
 
           <div className="archive-stats">
-            <div className="archive-stat archive-stat-live">
-              <span>Live</span>
-              <strong>01</strong>
-            </div>
-            <div className="archive-stat archive-stat-concept">
-              <span>Concept</span>
-              <strong>03</strong>
-            </div>
-            <div className="archive-stat archive-stat-experimental">
-              <span>Experimental</span>
-              <strong>01</strong>
-            </div>
+            {['Live', 'Concept', 'Experimental', 'In progress'].filter(status => stats[status]).map(status => (
+              <div className={`archive-stat archive-stat-${status.toLowerCase().replace(/\s+/g, '-')}`} key={status}>
+              <span>{status}</span>
+              <strong>{String(stats[status]).padStart(2, '0')}</strong>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="projects-grid archive-grid row g-4">
+        <div className="projects-grid archive-grid">
           {projects.map(project => (
-            <div className="col-12 col-xl-6" key={project.id}>
-              <ProjectCard project={project} />
-            </div>
+            <ProjectCard project={project} key={project.id} />
           ))}
         </div>
       </section>
-    </main>
+    </div>
   )
 }
