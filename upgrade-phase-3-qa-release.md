@@ -9,8 +9,10 @@ Dokumen ini melacak Phase 20 sampai Phase 30. Fokusnya adalah validasi aman sebe
 - [x] Tidak ada file aktif yang dihapus tanpa evidence.
 - [x] Tidak ditemukan duplicate component, `ProjectCardV2`, `BaseCard`, atau abstraction sementara.
 - [x] Canonical project schema divalidasi; field `demo` dinormalisasi menjadi `null` bila belum tersedia.
+- [x] Skills data dipisahkan ke `src/data/skills.js` dan diberi test integrity.
+- [x] `IconCarousel` berada di `src/components/ui/IconCarousel.jsx` sesuai target architecture.
 - [x] Canonical lab schema dan command contract divalidasi.
-- [x] Test suite bertambah menjadi 12 passing tests.
+- [x] Test suite bertambah menjadi 13 passing tests.
 - [x] Dependency audit: 0 vulnerabilities.
 - [x] `npm install --package-lock-only` berhasil dan lockfile tersinkron.
 - [x] Lint berhasil.

@@ -2,14 +2,14 @@
 
 ## Scope
 
-Dokumen ini melacak Phase 12 sampai Phase 19. Fokusnya adalah memindahkan homepage ke section architecture, membersihkan file legacy, menyelaraskan README/public asset, merapikan CSS ownership, dan menjaga latest light-first design.
+Dokumen ini melacak Phase 12 sampai Phase 19. Fokusnya adalah membersihkan file legacy, menyelaraskan README dan public asset, merapikan CSS ownership, serta menjaga latest light-first design.
 
 ## Execution Status — 2026-09-11
 
 - [x] Phase 12 audit selesai; tidak ada active file yang aman untuk dihapus.
 - [x] Public assets sudah direferensikan atau diklasifikasikan sebagai deployment-specific.
 - [x] README diperbarui dengan struktur `app`, `components`, `features`, `sections`, `pages`, `data`, dan `utils`.
-- [x] `IconCarousel.jsx` dipindahkan menjadi `sections/TechnicalFocusSection.jsx`.
+- [x] `IconCarousel.jsx` berada di `src/components/ui/` sebagai reusable UI.
 - [x] Semua homepage section sekarang berada di `src/sections/`.
 - [x] Pages hanya menjadi composition/page-level content.
 - [x] Feature-specific components berada di `src/features/`.
@@ -196,7 +196,6 @@ Sebelum menghapus selector:
 1. [ ] Search class di JSX.
 2. [ ] Search class di CSS.
 3. [ ] Search class di test atau public file.
-4. [ ] Pastikan tidak dipakai pada responsive state.
 5. [ ] Jalankan build setelah penghapusan.
 
 ## Forbidden Legacy Patterns

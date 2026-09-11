@@ -3,11 +3,11 @@ import { useRef, useState } from 'react'
 import SectionHeading from '../components/ui/SectionHeading'
 import CyberLabDetail from '../features/cyberlab/CyberLabDetail'
 import CyberLabTerminal from '../features/cyberlab/CyberLabTerminal'
-import { labCards } from '../data/projects'
+import { cyberLabs } from '../data/cyberLabs'
 
 export default function CyberLabPage({ navigateTo }) {
   const [activeLab, setActiveLab] = useState(0)
-  const currentLab = labCards[activeLab] ?? labCards[0]
+  const currentLab = cyberLabs[activeLab] ?? cyberLabs[0]
   const tabListRef = useRef(null)
 
   const scrollTabs = direction => {
@@ -50,7 +50,7 @@ export default function CyberLabPage({ navigateTo }) {
             </button>
 
             <div className="cyberlab-tab-strip" ref={tabListRef}>
-              {labCards.map((lab, index) => (
+              {cyberLabs.map((lab, index) => (
                 <button
                   key={`${lab.id}-tab`}
                   type="button"

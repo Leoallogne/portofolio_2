@@ -1,4 +1,4 @@
-import TechnicalFocusSection from '../sections/TechnicalFocusSection'
+import IconCarousel from '../components/ui/IconCarousel'
 import HeroSection from '../sections/HeroSection'
 import AboutSection from '../sections/AboutSection'
 import SkillsSection from '../sections/SkillsSection'
@@ -10,5 +10,5 @@ import ActivitySection from '../sections/ActivitySection'
 import ContactSection from '../sections/ContactSection'
 
 export default function HomePage({ navigateTo, filter, setFilter, activeLab, setActiveLab }) {
-  return <><HeroSection /><TechnicalFocusSection /><AboutSection /><SkillsSection /><ExperienceSection /><ProjectsSection navigateTo={navigateTo} filter={filter} setFilter={setFilter} /><CybersecuritySection navigateTo={navigateTo} activeLab={activeLab} setActiveLab={setActiveLab} /><LearningSection /><ActivitySection /><ContactSection /></>
+  return <><HeroSection /><IconCarousel /><AboutSection /><SkillsSection /><ExperienceSection /><ProjectsSection navigateTo={navigateTo} filter={filter} setFilter={setFilter} /><CybersecuritySection navigateTo={navigateTo} activeLab={activeLab} setActiveLab={setActiveLab} /><LearningSection /><ActivitySection /><ContactSection /></>
 }

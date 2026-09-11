@@ -26,9 +26,10 @@ Dokumen ini melacak Phase 1 sampai Phase 11 dari master refactor plan. Fokusnya 
 src/
 ├── app/App.jsx
 ├── components/
-│   ├── IconCarousel.jsx
 │   ├── layout/
 │   └── ui/
+│       ├── IconCarousel.jsx
+│       └── SectionHeading.jsx
 ├── features/
 │   ├── projects/
 │   ├── cyberlab/

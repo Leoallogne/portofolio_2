@@ -1,5 +1,5 @@
 import SectionHeading from '../components/ui/SectionHeading'
-import { skillGroups } from '../data/projects'
+import { skillGroups } from '../data/skills'
 
 export default function SkillsSection() {
   return (

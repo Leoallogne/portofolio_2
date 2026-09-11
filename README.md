@@ -121,6 +121,7 @@ src/
 		CyberLabPage.jsx
 	data/
 		projects.js
+		skills.js
 		cyberLabs.js
 	utils/
 		portfolio.js

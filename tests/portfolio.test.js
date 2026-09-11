@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { projects, repositories } from '../src/data/projects.js'
 import { cyberLabs } from '../src/data/cyberLabs.js'
+import { skillGroups } from '../src/data/skills.js'
 import { getCurrentPage, getNextTheme, getProjectFilters, getProjectStats, getStoredTheme, storeTheme } from '../src/utils/portfolio.js'
 import { defaultResponses, getCommandSuggestions, resolveCommand } from '../src/utils/terminal.js'
 
@@ -25,6 +26,11 @@ test('projects contain the canonical required fields', () => {
     assert.ok(project.github === null || typeof project.github === 'string')
     assert.ok(project.demo === null || typeof project.demo === 'string')
   }
+})
+
+test('skills data remains separated from project data', () => {
+  assert.equal(skillGroups.length, 5)
+  assert.ok(skillGroups.every(([title, skills]) => typeof title === 'string' && skills.length > 0))
 })
 
 test('project statistics are derived from project statuses', () => {
