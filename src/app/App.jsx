@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import BackToTop from './components/BackToTop'
-import HomePage from './pages/HomePage'
-import ProjectsPage from './pages/ProjectsPage'
-import CyberLabPage from './pages/CyberLabPage'
-import { getCurrentPage, getNextTheme, getStoredTheme, storeTheme } from './utils/portfolio'
+import Navbar from '../components/layout/Navbar'
+import Footer from '../components/layout/Footer'
+import BackToTop from '../components/layout/BackToTop'
+import HomePage from '../pages/HomePage'
+import ProjectsPage from '../pages/ProjectsPage'
+import CyberLabPage from '../pages/CyberLabPage'
+import { getCurrentPage, getNextTheme, getStoredTheme, storeTheme } from '../utils/portfolio'
 
 function App() {
   const [theme, setTheme] = useState(getStoredTheme)

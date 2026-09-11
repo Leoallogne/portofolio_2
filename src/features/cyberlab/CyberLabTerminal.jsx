@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Terminal as TerminalIcon } from 'lucide-react'
-import { defaultResponses, getCommandSuggestions, resolveCommand } from '../utils/terminal'
+import { defaultResponses, getCommandSuggestions, resolveCommand } from '../../utils/terminal'
 
 export default function CyberLabTerminal({ lab }) {
   const inputRef = useRef(null)

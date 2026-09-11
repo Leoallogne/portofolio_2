@@ -36,6 +36,7 @@ export const projects = [
     challenges: 'Mapping the workflow clearly so users could understand their financial activity and the system remained easy to review.',
     status: 'Concept',
     github: null,
+    demo: null,
     repository: { title: 'Student Finance Management', description: 'Personal finance dashboard concept built around transactions and data visualization.', language: 'PHP / MySQL' }
   },
   {
@@ -54,6 +55,7 @@ export const projects = [
     challenges: 'Managing imperfect source quality while designing a workflow that still felt useful and realistic.',
     status: 'Experimental',
     github: null,
+    demo: null,
     repository: { title: 'Business Lead Finder', description: 'Experimental lead discovery and organization concept for learning data workflows.', language: 'Python' }
   },
   {

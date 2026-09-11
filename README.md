@@ -85,23 +85,46 @@ The project does not require a server-side function or environment variable.
 
 ```text
 src/
+	app/
+		App.jsx
 	components/
-		BackToTop.jsx
-		Footer.jsx
-		Navbar.jsx
-		ProjectCard.jsx
-		ProjectModal.jsx
-		SectionHeading.jsx
-		Terminal.jsx
-		CyberLabDetail.jsx
-		CyberLabTerminal.jsx
+		layout/
+			BackToTop.jsx
+			Footer.jsx
+			Navbar.jsx
+		ui/
+			SectionHeading.jsx
+	features/
+		projects/
+			ProjectCard.jsx
+			ProjectModal.jsx
+		cyberlab/
+			CyberLabCard.jsx
+			CyberLabDetail.jsx
+			CyberLabTerminal.jsx
+		terminal/
+			Terminal.jsx
+	sections/
+		HeroSection.jsx
+		TechnicalFocusSection.jsx
+		AboutSection.jsx
+		SkillsSection.jsx
+		ExperienceSection.jsx
+		ProjectsSection.jsx
+		CybersecuritySection.jsx
+		LearningSection.jsx
+		ActivitySection.jsx
+		ContactSection.jsx
+	pages/
+		HomePage.jsx
+		ProjectsPage.jsx
+		CyberLabPage.jsx
 	data/
 		projects.js
 		cyberLabs.js
 	utils/
 		portfolio.js
 		terminal.js
-	App.jsx
 	index.css
 	main.jsx
 public/
@@ -112,7 +135,7 @@ public/
 
 ## Updating Content
 
-Update personal information in `src/App.jsx` and `src/components/Footer.jsx`. Add or edit projects, repositories, skills, and cybersecurity lab data in `src/data/projects.js`.
+Update portfolio composition in `src/app/App.jsx` and footer content in `src/components/layout/Footer.jsx`. Add or edit projects, repositories, skills, and cybersecurity lab data in `src/data/projects.js` and `src/data/cyberLabs.js`.
 
 Each project supports:
 

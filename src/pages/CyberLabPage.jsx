@@ -1,8 +1,8 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRef, useState } from 'react'
-import SectionHeading from '../components/SectionHeading'
-import CyberLabDetail from '../components/CyberLabDetail'
-import CyberLabTerminal from '../components/CyberLabTerminal'
+import SectionHeading from '../components/ui/SectionHeading'
+import CyberLabDetail from '../features/cyberlab/CyberLabDetail'
+import CyberLabTerminal from '../features/cyberlab/CyberLabTerminal'
 import { labCards } from '../data/projects'
 
 export default function CyberLabPage({ navigateTo }) {

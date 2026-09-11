@@ -34,7 +34,7 @@ function IconSet({ labelled = false }) {
   </div>
 }
 
-function IconCarousel() {
+export default function TechnicalFocusSection() {
   const [paused, setPaused] = useState(false)
   return <section className="icon-carousel" aria-label="Technical focus areas">
     <div className="icon-carousel-label container"><span>Focus / 00</span><i /><span>Technical toolkit</span><b>20 modules / continuous scan</b><button type="button" className="carousel-toggle" onClick={() => setPaused(!paused)} aria-pressed={paused}>{paused ? 'Play scan' : 'Pause scan'}</button></div>
@@ -47,4 +47,3 @@ function IconCarousel() {
   </section>
 }
 
-export default IconCarousel

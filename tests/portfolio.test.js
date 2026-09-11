@@ -16,6 +16,17 @@ test('project ids are unique', () => {
   assert.equal(new Set(ids).size, ids.length)
 })
 
+test('projects contain the canonical required fields', () => {
+  const requiredFields = ['id', 'title', 'subtitle', 'category', 'preview', 'description', 'technologies', 'features', 'overview', 'problem', 'solution', 'role', 'challenges', 'status', 'repository']
+  for (const project of projects) {
+    for (const field of requiredFields) {
+      assert.ok(project[field] !== undefined, `${project.id} is missing ${field}`)
+    }
+    assert.ok(project.github === null || typeof project.github === 'string')
+    assert.ok(project.demo === null || typeof project.demo === 'string')
+  }
+})
+
 test('project statistics are derived from project statuses', () => {
   assert.deepEqual(getProjectStats(projects), { Live: 1, Concept: 3, Experimental: 1 })
 })
@@ -35,6 +46,8 @@ test('lab ids and required fields are valid', () => {
     for (const field of ['title', 'status', 'difficulty', 'objective', 'scenario', 'topics', 'tools', 'checkpoints', 'commands', 'terminalIntro']) {
       assert.ok(lab[field], `${lab.id} is missing ${field}`)
     }
+    assert.ok(Object.keys(lab.commands).includes('help'))
+    assert.ok(Object.keys(lab.commands).includes('history'))
   }
 })
 
